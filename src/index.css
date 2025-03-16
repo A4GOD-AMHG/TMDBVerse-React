@@ -3,9 +3,8 @@
 
 @import "tailwindcss";
 
-
 @theme {
-  --color-primary: #1A0544;
+  --color-primary: #1a0544;
   --color-light-100: #cecefb;
   --color-light-200: #a8b5db;
 
@@ -40,15 +39,15 @@
   header {
     @apply sm:mt-10 mt-5;
   }
-
-  header img {
-    @apply w-full max-w-lg h-auto object-contain mx-auto drop-shadow-md;
-  }
 }
 
 @layer components {
   .pattern {
     @apply w-screen h-screen bg-center bg-cover absolute z-0;
+  }
+
+  .hero {
+    @apply w-full max-w-lg h-auto mx-auto;
   }
 
   .wrapper {
