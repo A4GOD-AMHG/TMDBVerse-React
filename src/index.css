@@ -4,7 +4,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1a0544;
+  --color-primary: #1a0544ff;
   --color-light-100: #cecefb;
   --color-light-200: #a8b5db;
 
@@ -19,9 +19,8 @@
 
 @layer base {
   body {
-    font-family: "DM Sans", serif;
+    font-family: "DM Sans", sans-serif;
     font-optical-sizing: auto;
-    background: var(--color-primary);
   }
 
   h1 {
@@ -52,6 +51,10 @@
 
   .wrapper {
     @apply px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10;
+  }
+
+  .poster-card {
+    @apply rounded-lg shadow-lg hover:scale-105 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer;
   }
 
   .trending {
@@ -138,10 +141,10 @@
     }
   }
 }
-
+/* 
 @utility text-gradient {
   @apply bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent;
-}
+} */
 
 @utility fancy-text {
   -webkit-text-stroke: 5px rgba(206, 206, 251, 0.5);

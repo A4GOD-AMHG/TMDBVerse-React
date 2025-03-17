@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
 
-const Search = () => {
+const Search = ({ searchValue, setSearchValue }) => {
     return (
-        <div>Search</div>
-    )
-}
+        <div className="search">
+            <div>
+                <img src="search.svg" alt="search" />
 
-export default Search
+                <input
+                    type="text"
+                    placeholder="Try 'The Dark Knight' or 'Forrest Gump'"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                />
+            </div>
+        </div>
+    );
+};
+
+export default Search;
