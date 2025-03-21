@@ -57,7 +57,19 @@
     @apply rounded-lg shadow-lg hover:scale-105 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer;
   }
 
-  .trending {
+  .search {
+    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg max-w-3xl mx-auto relative flex items-center;
+
+    & img {
+      @apply absolute left-5 h-5 w-5;
+    }
+
+    & input {
+      @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden;
+    }
+  }
+
+  /* .trending {
     @apply mt-20;
 
     & ul {
@@ -74,22 +86,6 @@
 
     & ul li img {
       @apply w-[127px] h-[163px] rounded-lg object-cover -ml-3.5;
-    }
-  }
-
-  .search {
-    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-10 max-w-3xl mx-auto;
-
-    & div {
-      @apply relative flex items-center;
-    }
-
-    & img {
-      @apply absolute left-2 h-5 w-5;
-    }
-
-    & input {
-      @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden;
     }
   }
 
@@ -139,14 +135,14 @@
     & .content .year {
       @apply text-gray-100 font-medium text-base;
     }
-  }
+  } */
 }
-/* 
-@utility text-gradient {
-  @apply bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent;
-} */
 
-@utility fancy-text {
+@utility text-gradient {
+  @apply bg-linear-to-r from-[#8468d8] to-[#afbbd3] bg-clip-text text-transparent;
+}
+
+/* @utility fancy-text {
   -webkit-text-stroke: 5px rgba(206, 206, 251, 0.5);
   font-size: 190px;
   font-family: "Bebas Neue", sans-serif;
@@ -159,4 +155,4 @@
   &::-webkit-scrollbar {
     display: none;
   }
-}
+} */
