@@ -30,7 +30,7 @@ export const movieService = {
             const response = await API.get('/popular');
             return response.data;
         } catch (error) {
-            throw new Error(error.response?.data?.error || 'Failed to fetch popular movies');
+            throw new Error(error.response?.data?.error || 'Failed to fetch hero movies');
         }
     },
 };

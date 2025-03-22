@@ -1,4 +1,3 @@
-// hooks/useSearchMovies.js
 import { useState, useEffect } from 'react';
 import { movieService } from '../services/api';
 

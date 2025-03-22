@@ -4,12 +4,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1a0544ff;
+  --color-primary: #0e0d0d;
+
   --color-light-100: #cecefb;
-  --color-light-200: #a8b5db;
-
   --color-gray-100: #9ca4ab;
-
   --color-dark-100: #0f0d23;
 
   --font-dm-sans: DM Sans, sans-serif;
@@ -29,6 +27,10 @@
 
   h2 {
     @apply text-2xl font-bold text-white sm:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl font-bold text-white sm:text-2xl;
   }
 
   main {
@@ -56,12 +58,8 @@
   .search {
     @apply w-full bg-light-100/5 px-4 py-3 rounded-lg max-w-3xl mx-auto relative flex items-center;
 
-    & img {
-      @apply absolute left-5 h-5 w-5;
-    }
-
     & input {
-      @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden;
+      @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-white placeholder-white outline-hidden;
     }
   }
 
@@ -84,11 +82,8 @@
       @apply w-[127px] h-[163px] rounded-lg object-cover -ml-3.5;
     }
   }
-  .text-gradient {
-    @apply bg-linear-to-r from-[#8468d8] to-[#afbbd3] bg-clip-text text-transparent;
-  }
   .movie-card {
-    @apply bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10;
+    @apply max-h-[500px] max-w-[300px] bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10;
 
     & img {
       @apply rounded-lg h-auto w-full;

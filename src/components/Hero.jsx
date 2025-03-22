@@ -19,28 +19,28 @@ const Hero = () => {
 
     return (
         <div className="hero relative flex items-center justify-center mb-5 group">
-            <div className="absolute h-[180px] w-[130px] transform -rotate-12 -translate-x-28 z-10 poster-card hover:z-30">
+            <div className="absolute h-[190px] w-[140px] md:h-[210px] md:w-[160px] transform -rotate-12 -translate-x-28 z-10 poster-card hover:z-30">
                 <img
                     src={movies[1].poster_path ? `https://image.tmdb.org/t/p/w500/${movies[1].poster_path}` : `/no-movie.png`}
                     alt={movies[1].title}
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-fit rounded-lg"
                 />
                 <div className="absolute inset-0 transition-opacity rounded-lg" />
             </div>
 
-            <div className="absolute h-[180px] w-[130px] transform rotate-12 translate-x-28 z-10 poster-card hover:z-30">
+            <div className="absolute h-[190px] w-[140px] md:h-[210px] md:w-[160px] transform rotate-12 translate-x-28 z-10 poster-card hover:z-30">
                 <img
                     src={movies[0].poster_path ? `https://image.tmdb.org/t/p/w500/${movies[0].poster_path}` : `/no-movie.png`}
                     alt={movies[0].title}
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-fit rounded-lg"
                 />
             </div>
 
-            <div className="relative h-[200px] w-[140px] z-20 -translate-y-2 poster-card">
+            <div className="relative h-[210px] w-[150px] md:h-[230px] md:w-[170px] z-20 -translate-y-2 poster-card">
                 <img
                     src={movies[2].poster_path ? `https://image.tmdb.org/t/p/w500/${movies[2].poster_path}` : `/no-movie.png`}
                     alt={movies[2].title}
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-fit rounded-lg"
                 />
             </div>
         </div>
