@@ -3,6 +3,7 @@ import { useMovies } from './hooks/useMovies';
 import Search from './components/Search';
 import Hero from './components/Hero';
 import Spinner from './components/Spinner';
+import MovieCard from './components/MovieCard';
 
 const App = () => {
   const { movies, isLoading, error } = useMovies();
@@ -31,14 +32,7 @@ const App = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {movies.map((movie) => (
-                  <div key={movie.id} className="bg-white/10 p-4 rounded-lg">
-                    <h3 className="text-white text-lg font-semibold">{movie.title}</h3>
-                    <p className="text-gray-300 text-sm mt-2">{movie.overview}</p>
-                    <div className="mt-3 text-purple-300 text-xs">
-                      <span>Release: {movie.release_date}</span>
-                      <span className="ml-3">⭐ {movie.popularity.toFixed(1)}</span>
-                    </div>
-                  </div>
+                  <MovieCard key={movie.id} movie={movie} />
                 ))}
               </div>
             )}
