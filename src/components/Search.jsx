@@ -2,7 +2,7 @@ import React from "react";
 
 const Search = ({ searchValue, setSearchValue }) => {
     return (
-        <div className="search">
+        <div className="search mt-4 md:mt-0">
             <img src="search.svg" alt="search" />
 
             <input

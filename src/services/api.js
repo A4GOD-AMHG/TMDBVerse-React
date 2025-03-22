@@ -8,6 +8,15 @@ const API = axios.create({
 });
 
 export const movieService = {
+
+    searchMovies: async (query) => {
+        try {
+            const response = await API.get(`/search?q=${encodeURIComponent(query)}`);
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.error || 'Failed to search movies');
+        }
+    },
     getDiscoverMovies: async () => {
         try {
             const response = await API.get('/discover');

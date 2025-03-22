@@ -4,10 +4,17 @@ import Search from './components/Search';
 import Hero from './components/Hero';
 import Spinner from './components/Spinner';
 import MovieCard from './components/MovieCard';
+import { useSearchMovies } from './hooks/useSearchMovies';
 
 const App = () => {
   const { movies, isLoading, error } = useMovies();
   const [searchValue, setSearchValue] = useState('');
+  const { searchResults, isSearching, searchError } = useSearchMovies(searchValue);
+
+  const displayedMovies = searchValue ? searchResults : movies;
+  const isDisplayLoading = searchValue ? isSearching : isLoading;
+  const displayError = searchValue ? searchError : error;
+
 
   return (
     <main className="w-screen h-screen bg-center bg-cover absolute z-0 overflow-y-auto hide-scrollbar">
@@ -21,16 +28,16 @@ const App = () => {
           <Search searchValue={searchValue} setSearchValue={setSearchValue} />
         </header>
 
-        <section className='all-movies'>
-          <h2 className="text-white text-2xl mb-4">All Movies</h2>
+        <section className='space-y-9'>
+          <h2 className="text-white text-2xl mb-4">{searchValue ? 'Search Results' : 'All Movies'}</h2>
 
-          {isLoading ? (
+          {isDisplayLoading ? (
             <Spinner />
-          ) : error ? (
-            <p className='text-red-500'>{error}</p>
+          ) : displayError ? (
+            <p className='text-red-500'>{displayError}</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {movies.map((movie) => (
+            <div className="grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {displayedMovies.map((movie) => (
                 <MovieCard key={movie.id} movie={movie} />
               ))}
             </div>
