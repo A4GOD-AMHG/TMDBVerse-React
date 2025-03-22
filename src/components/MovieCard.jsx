@@ -1,16 +1,37 @@
-import React from 'react'
+import React from "react";
 
-const MovieCard = ({ movie: { title, vote_average, poster_path, release_date, original_language } }) => {
+const MovieCard = ({
+    movie: { title, vote_average, poster_path, release_date, original_language },
+}) => {
     return (
         <div className="movie-card">
-            <h3 className="text-white text-lg font-semibold">{title}</h3>
-            <p className="text-gray-300 text-sm mt-2">{overview}</p>
-            <div className="mt-3 text-purple-300 text-xs">
-                <span>Release: {release_date}</span>
-                <span className="ml-3">⭐ {popularity.toFixed(1)}</span>
+            <img
+                src={
+                    poster_path
+                        ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                        : `/no-movie.png`
+                }
+                alt={title}
+            />
+            <div className="mt-4">
+                <h3>{title}</h3>
+
+                <div className="content">
+                    <div className="rating">
+                        <img src="star.svg" alt="Star Icon" />
+                        <p>{vote_average ? vote_average.toFixed(1) : "N/A"}</p>
+                    </div>
+
+                    <span>•</span>
+                    <p className="lang">{original_language}</p>
+                    <span>•</span>
+                    <p className="year">
+                        {release_date ? release_date.split("-")[0] : "N/A"}
+                    </p>
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default MovieCard
+export default MovieCard;
