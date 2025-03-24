@@ -6,12 +6,16 @@ import Spinner from './components/Spinner';
 import MovieCard from './components/MovieCard';
 import { useSearchMovies } from './hooks/useSearchMovies';
 import Footer from './components/Footer';
+import { useDebounce } from 'react-use';
 
 const App = () => {
   const { movies, isLoading, error } = useMovies();
   const [searchValue, setSearchValue] = useState('');
-  const { searchResults, isSearching, searchError } = useSearchMovies(searchValue);
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
 
+  useDebounce(() => { setDebouncedSearchTerm(searchValue) }, 500, [searchValue]);
+
+  const { searchResults, isSearching, searchError } = useSearchMovies(debouncedSearchTerm);
   const displayedMovies = searchValue ? searchResults : movies;
   const isDisplayLoading = searchValue ? isSearching : isLoading;
   const displayError = searchValue ? searchError : error;
