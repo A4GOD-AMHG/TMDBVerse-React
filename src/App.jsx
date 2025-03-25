@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMovies } from './hooks/useMovies';
 import Search from './components/Search';
 import Hero from './components/Hero';
@@ -7,8 +7,14 @@ import MovieCard from './components/MovieCard';
 import { useSearchMovies } from './hooks/useSearchMovies';
 import Footer from './components/Footer';
 import { useDebounce } from 'react-use';
+import { useTrendingMovies } from './hooks/useTrendingMovies';
+import { registerServiceWorker } from '../registerServiceWorker';
 
 const App = () => {
+
+  useEffect(() => {
+    registerServiceWorker();
+  }, []);
   const { movies, isLoading, error } = useMovies();
   const [searchValue, setSearchValue] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
@@ -16,6 +22,7 @@ const App = () => {
   useDebounce(() => { setDebouncedSearchTerm(searchValue) }, 500, [searchValue]);
 
   const { searchResults, isSearching, searchError } = useSearchMovies(debouncedSearchTerm);
+  const { trendingMovies, trendingLoading, trendingError } = useTrendingMovies(debouncedSearchTerm);
   const displayedMovies = searchValue ? searchResults : movies;
   const isDisplayLoading = searchValue ? isSearching : isLoading;
   const displayError = searchValue ? searchError : error;
@@ -31,6 +38,30 @@ const App = () => {
           </h1>
           <Search searchValue={searchValue} setSearchValue={setSearchValue} />
         </header>
+
+        {trendingMovies.length > 0 && (
+          <section className='trending'>
+            <h2 className="text-white text-2xl mb-4 text-center">Trending Now</h2>
+            {trendingLoading ? (
+              <Spinner />
+            ) : trendingError ? (
+              <p className='text-red-500 text-center'>{trendingError}</p>
+            ) : (
+              <ul>
+                {trendingMovies.map((movie, index) => (
+                  <li key={movie.id}>
+                    <p className='cursor-default'>{index + 1}</p>
+                    <img className='object-fill' src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                        : `/no-movie.png`
+                    } alt={movie.title} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        )}
 
         <section className='space-y-9 text-center'>
           <h2 className="text-white text-2xl mb-4">{searchValue ? 'Search Results' : 'Latest Movies'}</h2>

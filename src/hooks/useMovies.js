@@ -11,6 +11,12 @@ export const useMovies = () => {
             setIsLoading(true);
             setError('');
             try {
+                const cachedResponse = await caches.match('/discover');
+                if (cachedResponse) {
+                    const data = await cachedResponse.json();
+                    setMovies(data);
+                }
+
                 const data = await movieService.getDiscoverMovies();
                 setMovies(data);
             } catch (err) {
