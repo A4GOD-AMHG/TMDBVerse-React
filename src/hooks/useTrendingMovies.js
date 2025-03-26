@@ -7,27 +7,12 @@ export const useTrendingMovies = (searchQuery) => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        console.log("useTrendingMovies hook triggered");
         const fetchTrendingMovies = async () => {
             setIsLoading(true);
             setError('');
             try {
-                navigator.serviceWorker?.addEventListener('message', (event) => {
-                    if (event.data.type === 'REFRESH_TRENDING') {
-                        fetchTrendingData();
-                    }
-                });
-
-                const fetchTrendingData = async () => {
-                    const cachedResponse = await caches.match('/trending');
-                    if (cachedResponse) {
-                        const data = await cachedResponse.json();
-                        setTrendingMovies(Array.isArray(data) ? data : []);
-                    }
-
-                    const data = await movieService.getTrendingMovies();
-                    setTrendingMovies(Array.isArray(data) ? data : []);
-                };
+                const data = await movieService.getTrendingMovies();
+                setTrendingMovies(Array.isArray(data) ? data : []);
             } catch (err) {
                 setError(err.message);
                 setTrendingMovies([]);

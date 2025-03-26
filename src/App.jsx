@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useMovies } from './hooks/useMovies';
 import Search from './components/Search';
 import Hero from './components/Hero';
@@ -8,13 +8,11 @@ import { useSearchMovies } from './hooks/useSearchMovies';
 import Footer from './components/Footer';
 import { useDebounce } from 'react-use';
 import { useTrendingMovies } from './hooks/useTrendingMovies';
-import { registerServiceWorker } from '../registerServiceWorker';
+import { useNavigate } from 'react-router-dom';
 
 const App = () => {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    registerServiceWorker();
-  }, []);
   const { movies, isLoading, error } = useMovies();
   const [searchValue, setSearchValue] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
@@ -49,7 +47,7 @@ const App = () => {
             ) : (
               <ul>
                 {trendingMovies.map((movie, index) => (
-                  <li key={movie.id}>
+                  <li onClick={() => navigate(`/movies/${movie.id}`)} className='cursor-pointer' key={movie.id}>
                     <p className='cursor-default'>{index + 1}</p>
                     <img className='object-fill' src={
                       movie.poster_path
@@ -65,16 +63,17 @@ const App = () => {
 
         <section className='space-y-9 text-center'>
           <h2 className="text-white text-2xl mb-4">{searchValue ? 'Search Results' : 'Latest Movies'}</h2>
+          {displayedMovies.length <= 0 && <h3 className='mt-5'>No movies found with that prompt</h3>}
 
           {isDisplayLoading ? (
             <Spinner />
           ) : displayError ? (
             <p className='text-red-500'>{displayError}</p>
           ) :
-            displayedMovies.length > 0 ?
-              (<div className="md:grid flex flex-col justify-center items-center gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            (displayedMovies.length > 0 &&
+              <div className="md:grid flex flex-col justify-center items-center gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {displayedMovies.map((movie) => (<MovieCard key={movie.id} movie={movie} />))}
-              </div>) : <h3 className='mt-3'>No movies found with that prompt</h3>
+              </div>)
           }
         </section>
 
